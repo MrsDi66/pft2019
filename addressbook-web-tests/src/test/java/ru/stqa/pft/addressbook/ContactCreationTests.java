@@ -7,11 +7,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ContactCreationTests {
   private WebDriver wd;
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -29,7 +26,7 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testContactCreationTests() throws Exception {
+  public void testContactCreation() throws Exception {
     initAddNewContact();
     fillContactForm(new ContactData("Eva", "Semenovna", "Petrova", "Ekaterinburg, Vilonova 6 - 7", "+791290999198", "PetrovaEva@ya.ru"));
     submitNewContact();
@@ -66,7 +63,7 @@ public class ContactCreationTests {
     wd.findElement(By.linkText("add new")).click();
   }
 
-  @AfterClass(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     wd.findElement(By.linkText("Logout")).click();
     wd.quit();
@@ -87,21 +84,6 @@ public class ContactCreationTests {
       return true;
     } catch (NoAlertPresentException e) {
       return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
     }
   }
 }
