@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
-  private WebDriver wd;
+  FirefoxDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
