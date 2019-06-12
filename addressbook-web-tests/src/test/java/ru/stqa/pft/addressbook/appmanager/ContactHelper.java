@@ -1,11 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase{
-
   public ContactHelper(FirefoxDriver wd) {
     super(wd);
   }
@@ -18,4 +18,14 @@ public class ContactHelper extends HelperBase{
     type(By.name("mobile"),contactData.getPhone());
     type(By.name("email"),contactData.getEmail());
   }
+
+  public void selectedContact(){
+    click(By.name("selected[]"));
+  }
+
+  public void deletedContact(){
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void assertDeletedContact(){wd.switchTo().alert().accept();}
 }
